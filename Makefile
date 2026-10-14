@@ -20,7 +20,7 @@ build:
 build/%.o: src/%.c | build
 	$(AVR_CC) $(CPPFLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
 
-# LCD_SOURCE points to a separately supplied, compatible LCD implementation.
+# Supply the LCD driver with LCD_SOURCE=/path/to/lcd.c.
 firmware: check
 	@test -n "$(LCD_SOURCE)" || { echo "Set LCD_SOURCE to the path of a compatible lcd.c driver."; exit 1; }
 	$(AVR_CC) $(CPPFLAGS) $(CFLAGS) -c "$(LCD_SOURCE)" -o build/lcd.o
