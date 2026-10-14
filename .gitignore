@@ -1,9 +1,17 @@
 .DS_Store
+._*
+build/
 *.o
 *.elf
 *.hex
+*.eep
+*.d
 *.zip
-*.c
-*.h
-Makefile*
 Project_Answers*
+encoder_test*
+private/
+coursework/
+src/lcd.c
+lcd.c
+lcd [0-9]*
+Makefile [0-9]*

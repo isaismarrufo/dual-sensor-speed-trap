@@ -72,8 +72,48 @@ The project focuses on low-level firmware, peripheral integration, and hardware/
 ## Repository Contents
 
 ```text
+src/            Original application, interrupt, control, and ADC source
+include/        Application headers and LCD integration interface
 media/          Hardware photo and visual-only demo
+Makefile        Public-module compilation and optional firmware build
 README.md       Project overview and engineering highlights
 ```
 
-Firmware, course-provided drivers, assignment documents, and test binaries are retained separately in a private repository to respect course publication restrictions. This public showcase contains the project overview and demonstration assets.
+## Key Modules
+
+- `src/project.c` - Main loop, speed calculations, display updates, and status feedback
+- `src/interrupt.c` - Optical sensor timing, encoder input, buttons, timeout, and buzzer interrupts
+- `src/ports.c` - GPIO, timer, EEPROM, and peripheral initialization
+- `src/drivers.c` - Servo position mapping and buzzer note control
+- `src/adc.c` - Reused ADC helper; the speed-trap measurement path uses digital sensor inputs and does not call it
+- `include/lcd.h` - Integration interface for a separately supplied LCD driver
+
+The nine original application and helper source/header files are published without functional changes, with their existing comments preserved. The original LCD driver and header, course Makefile, assignment worksheets, and test archives remain in a separate private repository. This repository provides a new build file and LCD interface declarations; it does not include the LCD implementation.
+
+---
+
+## Build
+
+Install Make and an AVR toolchain with AVR-GCC, AVR-LibC, `avr-objcopy`, and `avr-size`.
+
+Compile the public modules for an ATmega328P running at 16 MHz:
+
+```sh
+make check
+```
+
+This checks compilation of the public source files without linking an LCD driver. To build complete firmware, supply a compatible LCD implementation separately:
+
+```sh
+make firmware LCD_SOURCE=/path/to/lcd.c
+```
+
+The driver must implement the functions in `include/lcd.h` for the original hardware wiring. The resulting `build/main.elf` and `build/main.hex` are local build outputs. The public source alone is not a complete linked firmware image. These targets do not program hardware.
+
+```sh
+make clean
+```
+
+## Implementation Notes
+
+The source preserves the historical firmware. AVR-GCC reports an overflow in the speed calculation's integer constant expression and format warnings where the LCD output uses `%d` with 32-bit values. Timer2 channel selection and the servo's compare-register use also need review against the physical wiring. Compilation was checked; the hardware was not revalidated for this publication.
