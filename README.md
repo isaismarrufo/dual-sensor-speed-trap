@@ -59,6 +59,10 @@ Makefile        Build targets
 - `src/adc.c` - ADC helper included in the project; the speed trap does not use it
 - `include/lcd.h` - Function declarations for the LCD driver
 
+## Source Availability
+
+The application firmware is included in this repository. The LCD driver, original build files, and supporting documents are kept private.
+
 ## Build
 
 Install Make and an AVR toolchain with AVR-GCC, AVR-LibC, `avr-objcopy`, and `avr-size`.
