@@ -6,7 +6,7 @@ Embedded C speed-measurement prototype built around an AVR microcontroller, dual
 
 ## Demo
 
-[Watch Demo Video](media/demo.mp4)
+[Download Demo Video](https://github.com/isaismarrufo/dual-sensor-speed-trap/raw/refs/heads/main/media/demo.mp4)
 
 Visual-only recording of the optical sensors, timing indicator, and LCD in operation.
 
