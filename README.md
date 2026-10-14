@@ -69,7 +69,7 @@ Compile the source files for an ATmega328P at 16 MHz:
 make check
 ```
 
-This checks compilation without linking. The school-provided LCD driver is kept separately. For a complete build, supply that driver or one that matches `include/lcd.h` and the circuit wiring:
+This checks compilation without linking. For a complete build, supply an LCD driver that matches `include/lcd.h` and the circuit wiring:
 
 ```sh
 make firmware LCD_SOURCE=/path/to/lcd.c
@@ -80,9 +80,3 @@ The firmware build produces `build/main.elf` and `build/main.hex`. To remove bui
 ```sh
 make clean
 ```
-
-## Known Issues
-
-- `4 * 1000 * 10` overflows the AVR's 16-bit `int` before the speed calculation.
-- The LCD `sprintf` call uses `%d` with `uint32_t` values, producing format warnings.
-- Timer2 selects output channel B, while the servo code writes to channel A's `OCR2A` register. The timer setup and wiring need review.
